@@ -1,0 +1,23 @@
+# Virtual Environments
+venv/
+env/
+.env
+
+approach.pdf
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/

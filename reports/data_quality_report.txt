@@ -1,0 +1,10 @@
+Data Quality Report - Day 1
+===========================
+
+Validation Task: Check if all AMFI codes in fund_master exist in nav_history.
+
+Result: SUCCESS
+- Number of unique AMFI codes in fund_master: 40
+- All 40 codes were successfully found in nav_history.csv.
+- No missing AMFI codes detected.
+- Data consistency between master and history tables is verified.
