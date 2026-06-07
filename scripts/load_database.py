@@ -4,7 +4,7 @@ from pathlib import Path
 
 def setup_database():
     project_dir = Path(__file__).parent.parent
-    db_dir = project_dir / 'db'
+    db_dir = project_dir / 'data' / 'db'
     db_dir.mkdir(parents=True, exist_ok=True)
     db_path = db_dir / 'bluestock_mf.db'
     sql_schema_path = project_dir / 'sql' / 'schema.sql'
