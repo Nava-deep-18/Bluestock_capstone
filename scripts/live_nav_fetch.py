@@ -3,12 +3,25 @@ import pandas as pd
 import os
 import time
 
-def fetch_and_save_nav(amfi_code, output_dir, retries=3):
-    print(f"--- Fetching Live NAV for {amfi_code} ---")
-    url = f"https://api.mfapi.in/mf/{amfi_code}"
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+def fetch_and_update_nav(amfi_codes, raw_dir):
+    print("\n[STEP 1] Fetching Live Data from mfapi.in...")
+    history_file = os.path.join(raw_dir, '02_nav_history.csv')
     
-    for attempt in range(retries):
+    # Load existing static history
+    if os.path.exists(history_file):
+        existing_df = pd.read_csv(history_file)
+        initial_rows = len(existing_df)
+        print(f"Loaded existing history with {initial_rows} rows.")
+    else:
+        existing_df = pd.DataFrame(columns=['amfi_code', 'date', 'nav'])
+        initial_rows = 0
+
+    new_data_frames = []
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+
+    for code in amfi_codes:
+        print(f" -> Fetching NAV for AMFI Code: {code}")
+        url = f"https://api.mfapi.in/mf/{code}"
         try:
             response = requests.get(url, headers=headers, timeout=25)
             if response.status_code == 200:
@@ -16,28 +29,47 @@ def fetch_and_save_nav(amfi_code, output_dir, retries=3):
                 nav_data = data.get('data', [])
                 if nav_data:
                     df = pd.DataFrame(nav_data)
-                    df['amfi_code'] = amfi_code
+                    df['amfi_code'] = int(code)  # Ensure type matches existing data
                     df = df[['amfi_code', 'date', 'nav']]
-                    output_path = os.path.join(output_dir, f"{amfi_code}_raw_nav.csv")
-                    df.to_csv(output_path, index=False)
-                    print(f"Successfully saved {len(df)} rows to {output_path}")
-                    return # Success
-                else:
-                    print(f"No NAV data found for {amfi_code}.")
-                    return
+                    new_data_frames.append(df)
             else:
-                print(f"Failed to fetch data for {amfi_code}. Status code: {response.status_code}")
-                break
-        except requests.exceptions.RequestException as e:
-            print(f"Attempt {attempt+1} failed for {amfi_code}: {e}")
-            time.sleep(3) # Wait before retry
+                print(f"    Failed API call for {code}. Status: {response.status_code}")
+        except Exception as e:
+            print(f"    Error for {code}: {e}")
+        time.sleep(1) # Be polite to the API
+        
+    if new_data_frames:
+        # Combine newly fetched data
+        new_df = pd.concat(new_data_frames, ignore_index=True)
+        
+        # Merge with existing historical data
+        combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+        
+        # Standardize dates to strictly identify duplicates
+        combined_df['date_parsed'] = pd.to_datetime(combined_df['date'], dayfirst=True, format="mixed")
+        
+        # Sort so we keep the absolute latest entry if there are overlaps
+        combined_df = combined_df.sort_values(by=['amfi_code', 'date_parsed'])
+        
+        # Drop duplicates (this ensures we only add NEW days that didn't exist before)
+        combined_df = combined_df.drop_duplicates(subset=['amfi_code', 'date_parsed'], keep='last')
+        
+        # Drop temporary parsing column
+        combined_df = combined_df.drop(columns=['date_parsed'])
+        
+        # Overwrite the raw CSV file with the beautifully merged data
+        combined_df.to_csv(history_file, index=False)
+        final_rows = len(combined_df)
+        print(f"[SUCCESS] Updated 02_nav_history.csv! Added {final_rows - initial_rows} new rows of live data.")
+    else:
+        print("No new data was fetched.")
 
 if __name__ == "__main__":
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    output_dir = os.path.join(project_root, "data", "raw")
-    os.makedirs(output_dir, exist_ok=True)
+    raw_dir = os.path.join(project_root, "data", "raw")
     
-    # Retry fetching the last one that timed out
-    fetch_and_save_nav("120841", output_dir)
-    print("\nAll NAV fetching completed!")
+    # The 5 funds required by the project specifications
+    target_funds = ["119551", "120503", "118632", "119092", "120841"]
+    
+    fetch_and_update_nav(target_funds, raw_dir)

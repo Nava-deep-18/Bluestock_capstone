@@ -35,10 +35,10 @@ def setup_database():
             df = pd.read_csv(csv_path, nrows=5)
             # Add primary/foreign keys manually for core tables if possible, but standard DDL is fine
             ddl = pd.io.sql.get_schema(df, table_name)
-            schema_statements.append(f"-- Table: {table_name}\\n{ddl};\\n")
+            schema_statements.append(f"-- Table: {table_name}\n{ddl};\n")
             
     with open(sql_schema_path, 'w') as f:
-        f.write("\\n".join(schema_statements))
+        f.write("\n".join(schema_statements))
     print(f"Generated {sql_schema_path}")
 
     # 2. Connect and Load Data

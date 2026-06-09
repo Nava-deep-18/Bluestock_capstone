@@ -8,7 +8,7 @@ def clean_nav_data(raw_dir, processed_dir):
     """Extracts and cleans NAV history data."""
     print(" -> Cleaning NAV History...")
     nav_df = pd.read_csv(raw_dir / '02_nav_history.csv')
-    nav_df['date'] = pd.to_datetime(nav_df['date'])
+    nav_df['date'] = pd.to_datetime(nav_df['date'], dayfirst=True, format='mixed')
     nav_df = nav_df.drop_duplicates(subset=['amfi_code', 'date'])
     
     nav_df = nav_df.set_index('date')
