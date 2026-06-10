@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 # Configure the main application page
 st.set_page_config(
@@ -7,6 +8,10 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+LOGO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'logo.jpg'))
+if os.path.exists(LOGO_PATH):
+    st.logo(LOGO_PATH)
 
 # Landing page welcome message
 st.title("📈 Bluestock Mutual Fund Analytics")

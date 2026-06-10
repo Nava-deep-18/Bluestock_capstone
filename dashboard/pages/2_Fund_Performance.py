@@ -8,6 +8,10 @@ import os
 
 st.set_page_config(page_title="Fund Performance", layout="wide")
 
+LOGO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'logo.jpg'))
+if os.path.exists(LOGO_PATH):
+    st.logo(LOGO_PATH)
+
 # Connect dynamically to the SQLite database
 DB_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'db', 'bluestock_mf.db'))
 
