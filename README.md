@@ -23,16 +23,13 @@ flowchart TD
 
 ## Chapters
 
-1. [Streamlit Dashboard Application
-   ](01_streamlit_dashboard_application_.md)
-2. [Financial Simulation & Optimization Modules
-   ](02_financial_simulation___optimization_modules_.md)
-3. [Database Query Helper
-   ](03_database_query_helper_.md)
-4. [Data Model / Database Schema
-   ](04_data_model___database_schema_.md)
-5. [ETL Pipeline (Extract, Transform, Load)
-   ](05_etl_pipeline__extract__transform__load__.md)
+## Chapters
+
+1. [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application)
+2. [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules)
+3. [Database Query Helper](#chapter-3-database-query-helper)
+4. [Data Model / Database Schema](#chapter-4-data-model--database-schema)
+5. [ETL Pipeline (Extract, Transform, Load)](#chapter-5-etl-pipeline-extract-transform-load)
 
 ---
 
@@ -107,7 +104,7 @@ In essence:
 1.  You (the **User**) click a page name.
 2.  Your web browser tells the **Streamlit Dashboard Application** to load that specific page.
 3.  The Python code for that page (like `1_Industry_Overview.py`) starts running.
-4.  This code then asks our **SQLite Database** for the specific mutual fund data it needs (e.g., latest AUM, SIP inflows). We'll learn more about how we talk to the database in the [Database Query Helper](03_database_query_helper_.md) chapter and what data it holds in [Data Model / Database Schema](04_data_model___database_schema_.md).
+4.  This code then asks our **SQLite Database** for the specific mutual fund data it needs (e.g., latest AUM, SIP inflows). We'll learn more about how we talk to the database in the [Database Query Helper](#chapter-3-database-query-helper) chapter and what data it holds in [Data Model / Database Schema](#chapter-4-data-model--database-schema).
 5.  The database sends the data back.
 6.  The Python code uses this data to create interactive charts (using libraries like `plotly`) and formats numbers for Key Performance Indicators (KPIs).
 7.  Finally, Streamlit takes all these components and displays them beautifully in your **Browser** for you to see and interact with!
@@ -228,13 +225,13 @@ In essence, the Python code for each page retrieves data from the database, proc
 
 In this chapter, we learned that the **Streamlit Dashboard Application** is an interactive web interface that allows users to easily explore and visualize mutual fund data without writing any code. We understood how it's built with Python using the Streamlit library, how it uses different "pages" for various topics, and how it fetches data from a database to display charts, tables, and important numbers.
 
-Next, we'll dive deeper into the core financial calculations and models that power some of these insights in our dashboard: the [Financial Simulation & Optimization Modules](02_financial_simulation___optimization_modules_.md).
+Next, we'll dive deeper into the core financial calculations and models that power some of these insights in our dashboard: the [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules).
 
 ---
 
 # Chapter 2: Financial Simulation & Optimization Modules
 
-In the previous chapter, [Streamlit Dashboard Application](01_streamlit_dashboard_application_.md), we learned how our dashboard provides a user-friendly window into mutual fund data, allowing you to see trends and numbers with just a few clicks. But what if you don't just want to see what _has happened_, but also want to understand what _could happen_ in the future, or how to make the _best decisions_ with your funds?
+In the previous chapter, [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application), we learned how our dashboard provides a user-friendly window into mutual fund data, allowing you to see trends and numbers with just a few clicks. But what if you don't just want to see what _has happened_, but also want to understand what _could happen_ in the future, or how to make the _best decisions_ with your funds?
 
 This is where our **Financial Simulation & Optimization Modules** come in! Think of them as the "brain" behind the dashboard that performs smart calculations. They don't just show you raw data; they help you forecast, strategize, and make smarter investment choices.
 
@@ -297,7 +294,7 @@ sequenceDiagram
 
 The Monte Carlo simulation page (`dashboard\pages\5_Monte_Carlo_Simulation.py`) performs these steps:
 
-1.  **Get Historical Data:** It first fetches all past daily NAVs for your chosen fund from our [Data Model / Database Schema](04_data_model___database_schema_.md) using the [Database Query Helper](03_database_query_helper_.md).
+1.  **Get Historical Data:** It first fetches all past daily NAVs for your chosen fund from our [Data Model / Database Schema](#chapter-4-data-model--database-schema) using the [Database Query Helper](#chapter-3-database-query-helper).
 
     ```python
     # From dashboard\pages\5_Monte_Carlo_Simulation.py
@@ -540,13 +537,13 @@ The fund recommender script (`scripts\recommender.py`) follows these steps:
 
 In this chapter, we explored the powerful **Financial Simulation & Optimization Modules**. We learned how the **Monte Carlo Simulation** helps us forecast future fund values by running thousands of "what if" scenarios, how **Markowitz Portfolio Optimization** helps us find the "efficient frontier" – the best combination of funds for optimal risk-adjusted returns – and how a **Fund Recommender** can suggest suitable funds based on your risk appetite.
 
-These modules transform raw historical data into actionable insights, helping users make more informed investment decisions. All these calculations rely heavily on having well-organized and accessible data. In our next chapter, we'll dive into how we actually get and manage this data with the [Database Query Helper](03_database_query_helper_.md).
+These modules transform raw historical data into actionable insights, helping users make more informed investment decisions. All these calculations rely heavily on having well-organized and accessible data. In our next chapter, we'll dive into how we actually get and manage this data with the [Database Query Helper](#chapter-3-database-query-helper).
 
 ---
 
 # Chapter 3: Database Query Helper
 
-In the last chapter, [Financial Simulation & Optimization Modules](02_financial_simulation___optimization_modules_.md), we saw how our dashboard can perform complex calculations like forecasting future NAVs and optimizing portfolios. But for all these powerful features and the beautiful charts we discussed in [Streamlit Dashboard Application](01_streamlit_dashboard_application_.md), there's one fundamental question: **Where does all the data come from?**
+In the last chapter, [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules), we saw how our dashboard can perform complex calculations like forecasting future NAVs and optimizing portfolios. But for all these powerful features and the beautiful charts we discussed in [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application), there's one fundamental question: **Where does all the data come from?**
 
 Imagine you have a giant filing cabinet filled with all the mutual fund information – historical prices, fund details, transaction records, and more. How do your dashboard pages reliably, quickly, and safely get the specific pieces of information they need from this filing cabinet? This is exactly the problem our **Database Query Helper** solves!
 
@@ -683,7 +680,7 @@ def load_data(query):
 
 Let's break down the key parts of this code:
 
-- **`DB_PATH = ...`**: This line figures out the exact location of our SQLite database file (`bluestock_mf.db`). This database holds all the mutual fund data we've collected. We'll learn more about what's inside it in the [Data Model / Database Schema](04_data_model___database_schema_.md) chapter.
+- **`DB_PATH = ...`**: This line figures out the exact location of our SQLite database file (`bluestock_mf.db`). This database holds all the mutual fund data we've collected. We'll learn more about what's inside it in the [Data Model / Database Schema](#chapter-4-data-model--database-schema) chapter.
 - **`@st.cache_data`**: This is a special instruction from the Streamlit library. It tells Python, "Hey, remember the results of this `load_data` function! If it's called again with the _exact same inputs_ (the `query` string), don't run the code inside; just give back the saved result." This is a huge performance booster for our dashboard.
 - **`conn = sqlite3.connect(DB_PATH)`**: This line establishes the connection to our SQLite database. Think of it as opening the filing cabinet.
 - **`df = pd.read_sql(query, conn)`**: This is a powerful function from the Pandas library. It takes your `query` (the SQL request) and the `conn` (the open database connection), sends the query to the database, waits for the results, and then immediately converts those results into a `pandas DataFrame`. This is how we get our neat data table!
@@ -696,13 +693,13 @@ In essence, `load_data` is a robust and efficient wrapper that handles all the t
 
 In this chapter, we uncovered the vital role of the **Database Query Helper**, specifically our `load_data` function. We learned that it's the core component responsible for securely connecting to our SQLite database, executing specific SQL queries to fetch data, efficiently converting that data into user-friendly Pandas DataFrames, and closing connections. We also understood the importance of the `@st.cache_data` decorator, which acts as a smart memory to significantly speed up our dashboard.
 
-This helper function ensures that all the data shown on our Streamlit dashboard, whether it's for simple KPIs or complex simulations, is retrieved reliably and quickly. But what exactly _is_ in this database? In our next chapter, we'll dive into the [Data Model / Database Schema](04_data_model___database_schema_.md) to understand the structure and content of our mutual fund data.
+This helper function ensures that all the data shown on our Streamlit dashboard, whether it's for simple KPIs or complex simulations, is retrieved reliably and quickly. But what exactly _is_ in this database? In our next chapter, we'll dive into the [Data Model / Database Schema](#chapter-4-data-model--database-schema) to understand the structure and content of our mutual fund data.
 
 ---
 
 # Chapter 4: Data Model / Database Schema
 
-In our last chapter, [Database Query Helper](03_database_query_helper_.md), we learned about `load_data` – our trusty librarian for fetching information from the database using special requests called SQL queries. But how does this librarian know where to find the books, what sections they belong to, or how different books relate to each other?
+In our last chapter, [Database Query Helper](#chapter-3-database-query-helper), we learned about `load_data` – our trusty librarian for fetching information from the database using special requests called SQL queries. But how does this librarian know where to find the books, what sections they belong to, or how different books relate to each other?
 
 This is where the **Data Model / Database Schema** comes in! It's the master plan, the blueprint, or the complete catalog system of our entire mutual fund analytics database.
 
@@ -838,7 +835,7 @@ Using our understanding of the Data Model and the `data_dictionary.md`, here's h
 
 2.  **Identify how to link them:** Both tables have `amfi_code`. This is our common "key" to connect fund details with its daily prices.
 
-3.  **Construct an SQL Query:** We'll ask our [Database Query Helper](03_database_query_helper_.md) (the `load_data` function) for this.
+3.  **Construct an SQL Query:** We'll ask our [Database Query Helper](#chapter-3-database-query-helper) (the `load_data` function) for this.
 
     First, let's get just the fund details:
 
@@ -894,7 +891,7 @@ Using our understanding of the Data Model and the `data_dictionary.md`, here's h
 
 ### Under the Hood: The Schema in Action
 
-When our Streamlit dashboard page wants to display "Industry Overview" or "Fund Performance," its Python code uses our `load_data` helper (from [Database Query Helper](03_database_query_helper_.md)). The `load_data` function receives an SQL query string that is carefully crafted based on our understanding of the **Data Model**.
+When our Streamlit dashboard page wants to display "Industry Overview" or "Fund Performance," its Python code uses our `load_data` helper (from [Database Query Helper](#chapter-3-database-query-helper)). The `load_data` function receives an SQL query string that is carefully crafted based on our understanding of the **Data Model**.
 
 Here's a simplified sequence of how the dashboard uses the Data Model:
 
@@ -924,17 +921,17 @@ Without this well-defined schema, writing correct queries and consistently getti
 
 In this chapter, we explored the crucial concept of the **Data Model / Database Schema**. We learned that it's the blueprint that defines the structure of our mutual fund analytics database, detailing what information is stored, how it's organized into **tables** (like `dim_fund` and `fact_nav`), what **columns** (specific details) each table contains, and how **keys** (like `amfi_code`) link related data across tables. We also understood the difference between descriptive **dimension tables** and quantitative **fact tables**.
 
-This understanding is fundamental, as it allows all our dashboard components and simulation modules to intelligently request and retrieve the precise data they need. But where does all this organized data come from in the first place? In our next chapter, we'll discover the [ETL Pipeline (Extract, Transform, Load)](05_etl_pipeline__extract__transform__load__.md), which is responsible for gathering, cleaning, and loading all this raw financial data into our beautifully structured database.
+This understanding is fundamental, as it allows all our dashboard components and simulation modules to intelligently request and retrieve the precise data they need. But where does all this organized data come from in the first place? In our next chapter, we'll discover the [ETL Pipeline (Extract, Transform, Load)](#chapter-5-etl-pipeline-extract-transform-load), which is responsible for gathering, cleaning, and loading all this raw financial data into our beautifully structured database.
 
 ---
 
 # Chapter 5: ETL Pipeline (Extract, Transform, Load)
 
-In our last chapter, [Data Model / Database Schema](04_data_model___database_schema_.md), we learned about the organized structure of our database – how information is neatly arranged in tables like `dim_fund` and `fact_nav`, and how these tables are connected. But where does all this perfectly organized data come from in the first place? It certainly doesn't appear out of thin air!
+In our last chapter, [Data Model / Database Schema](#chapter-4-data-model--database-schema), we learned about the organized structure of our database – how information is neatly arranged in tables like `dim_fund` and `fact_nav`, and how these tables are connected. But where does all this perfectly organized data come from in the first place? It certainly doesn't appear out of thin air!
 
 Imagine you have a big box filled with various raw ingredients for a complex recipe: some fresh vegetables that need washing and chopping, some pre-packaged items, and some spices. You can't just throw them all into the pot; you need to prepare them properly.
 
-This is exactly the problem our **ETL Pipeline** solves! It's the automated assembly line responsible for taking messy, raw data from various source files, cleaning it up, and placing it neatly into our structured database. This ensures our [Streamlit Dashboard Application](01_streamlit_dashboard_application_.md) and [Financial Simulation & Optimization Modules](02_financial_simulation___optimization_modules_.md) always use fresh, reliable, and properly formatted information for their analytics.
+This is exactly the problem our **ETL Pipeline** solves! It's the automated assembly line responsible for taking messy, raw data from various source files, cleaning it up, and placing it neatly into our structured database. This ensures our [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application) and [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules) always use fresh, reliable, and properly formatted information for their analytics.
 
 ### What is an ETL Pipeline?
 
@@ -967,7 +964,7 @@ This is the most crucial step! Once extracted, the data often isn't perfect. It 
 Finally, after the data is clean and perfectly formatted, the **Load** step puts it into our central database.
 
 - **Analogy:** This is like carefully placing your prepared ingredients into neatly labeled containers in your organized pantry or fridge, ready to be cooked at any time.
-- **In our project:** The transformed data (which is now in neat tables, or Pandas DataFrames in Python) is loaded into the appropriate tables within our SQLite database (`bluestock_mf.db`), following the structure defined in our [Data Model / Database Schema](04_data_model___database_schema_.md).
+- **In our project:** The transformed data (which is now in neat tables, or Pandas DataFrames in Python) is loaded into the appropriate tables within our SQLite database (`bluestock_mf.db`), following the structure defined in our [Data Model / Database Schema](#chapter-4-data-model--database-schema).
 
 ### How to Run the ETL Pipeline
 
@@ -1203,17 +1200,17 @@ if __name__ == '__main__':
     setup_database()
 ```
 
-- `file_to_table_map`: This dictionary defines which cleaned CSV file should be loaded into which database table (e.g., `clean_nav.csv` goes into `fact_nav`). This directly relates to our [Data Model / Database Schema](04_data_model___database_schema_.md).
+- `file_to_table_map`: This dictionary defines which cleaned CSV file should be loaded into which database table (e.g., `clean_nav.csv` goes into `fact_nav`). This directly relates to our [Data Model / Database Schema](#chapter-4-data-model--database-schema).
 - `conn = sqlite3.connect(db_path)`: This opens the connection to our database.
 - `df = pd.read_csv(csv_path)`: It reads one of the _cleaned_ CSV files generated in the "Transform" phase.
 - `df.to_sql(table_name, conn, if_exists='replace', index=False)`: This is the key "Load" step! It takes the Pandas DataFrame (`df`) and writes all its data directly into the specified `table_name` in our database connection (`conn`). `if_exists='replace'` means it will delete any existing table with that name and create a new one, ensuring our data is always fresh.
-- `conn.execute("CREATE INDEX IF NOT EXISTS ...")`: After loading, we create special indexes on key columns (`amfi_code`, `date`). These are like fast lookup tables in a book, making it much quicker for the [Database Query Helper](03_database_query_helper_.md) to find specific data later.
+- `conn.execute("CREATE INDEX IF NOT EXISTS ...")`: After loading, we create special indexes on key columns (`amfi_code`, `date`). These are like fast lookup tables in a book, making it much quicker for the [Database Query Helper](#chapter-3-database-query-helper) to find specific data later.
 - `conn.commit()` and `conn.close()`: These ensure that all changes are permanently saved and the database connection is properly closed.
 
 ### Conclusion
 
 In this chapter, we unpacked the essential **ETL Pipeline (Extract, Transform, Load)**. We learned that it's the automated system that brings raw, messy data to life by first **Extracting** it from source files, then thoroughly **Transforming** it through cleaning and standardization, and finally **Loading** the refined data into our structured SQLite database.
 
-This pipeline is the backbone of our entire project, ensuring that the [Streamlit Dashboard Application](01_streamlit_dashboard_application_.md) and its powerful [Financial Simulation & Optimization Modules](02_financial_simulation___optimization_modules_.md) always have access to accurate, up-to-date, and well-organized information, all retrieved efficiently by the [Database Query Helper](03_database_query_helper_.md) following our [Data Model / Database Schema](04_data_model___database_schema_.md). Now you understand the full journey of our mutual fund data, from raw CSVs to interactive dashboard insights!
+This pipeline is the backbone of our entire project, ensuring that the [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application) and its powerful [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules) always have access to accurate, up-to-date, and well-organized information, all retrieved efficiently by the [Database Query Helper](#chapter-3-database-query-helper) following our [Data Model / Database Schema](#chapter-4-data-model--database-schema). Now you understand the full journey of our mutual fund data, from raw CSVs to interactive dashboard insights!
 
 ---

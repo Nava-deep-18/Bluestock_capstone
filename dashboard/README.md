@@ -69,7 +69,7 @@ In essence:
 1.  You (the **User**) click a page name.
 2.  Your web browser tells the **Streamlit Dashboard Application** to load that specific page.
 3.  The Python code for that page (like `1_Industry_Overview.py`) starts running.
-4.  This code then asks our **SQLite Database** for the specific mutual fund data it needs (e.g., latest AUM, SIP inflows). We'll learn more about how we talk to the database in the [Database Query Helper](03_database_query_helper_.md) chapter and what data it holds in [Data Model / Database Schema](04_data_model___database_schema_.md).
+4.  This code then asks our **SQLite Database** for the specific mutual fund data it needs (e.g., latest AUM, SIP inflows). We'll learn more about how we talk to the database in the [Database Query Helper](#chapter-3-database-query-helper) chapter and what data it holds in [Data Model / Database Schema](#chapter-4-data-model--database-schema).
 5.  The database sends the data back.
 6.  The Python code uses this data to create interactive charts (using libraries like `plotly`) and formats numbers for Key Performance Indicators (KPIs).
 7.  Finally, Streamlit takes all these components and displays them beautifully in your **Browser** for you to see and interact with!
@@ -190,13 +190,13 @@ In essence, the Python code for each page retrieves data from the database, proc
 
 In this chapter, we learned that the **Streamlit Dashboard Application** is an interactive web interface that allows users to easily explore and visualize mutual fund data without writing any code. We understood how it's built with Python using the Streamlit library, how it uses different "pages" for various topics, and how it fetches data from a database to display charts, tables, and important numbers.
 
-Next, we'll dive deeper into the core financial calculations and models that power some of these insights in our dashboard: the [Financial Simulation & Optimization Modules](02_financial_simulation___optimization_modules_.md).
+Next, we'll dive deeper into the core financial calculations and models that power some of these insights in our dashboard: the [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules).
 
 ---
 
 # Chapter 2: Financial Simulation & Optimization Modules
 
-In the previous chapter, [Streamlit Dashboard Application](01_streamlit_dashboard_application_.md), we learned how our dashboard provides a user-friendly window into mutual fund data, allowing you to see trends and numbers with just a few clicks. But what if you don't just want to see what _has happened_, but also want to understand what _could happen_ in the future, or how to make the _best decisions_ with your funds?
+In the previous chapter, [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application), we learned how our dashboard provides a user-friendly window into mutual fund data, allowing you to see trends and numbers with just a few clicks. But what if you don't just want to see what _has happened_, but also want to understand what _could happen_ in the future, or how to make the _best decisions_ with your funds?
 
 This is where our **Financial Simulation & Optimization Modules** come in! Think of them as the "brain" behind the dashboard that performs smart calculations. They don't just show you raw data; they help you forecast, strategize, and make smarter investment choices.
 
@@ -259,7 +259,7 @@ sequenceDiagram
 
 The Monte Carlo simulation page (`dashboard\pages\5_Monte_Carlo_Simulation.py`) performs these steps:
 
-1.  **Get Historical Data:** It first fetches all past daily NAVs for your chosen fund from our [Data Model / Database Schema](04_data_model___database_schema_.md) using the [Database Query Helper](03_database_query_helper_.md).
+1.  **Get Historical Data:** It first fetches all past daily NAVs for your chosen fund from our [Data Model / Database Schema](#chapter-4-data-model--database-schema) using the [Database Query Helper](#chapter-3-database-query-helper).
 
     ```python
     # From dashboard\pages\5_Monte_Carlo_Simulation.py

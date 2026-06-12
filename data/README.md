@@ -1,6 +1,6 @@
 # Chapter 3: Database Query Helper
 
-In the last chapter, [Financial Simulation & Optimization Modules](02_financial_simulation___optimization_modules_.md), we saw how our dashboard can perform complex calculations like forecasting future NAVs and optimizing portfolios. But for all these powerful features and the beautiful charts we discussed in [Streamlit Dashboard Application](01_streamlit_dashboard_application_.md), there's one fundamental question: **Where does all the data come from?**
+In the last chapter, [Financial Simulation & Optimization Modules](#chapter-2-financial-simulation--optimization-modules), we saw how our dashboard can perform complex calculations like forecasting future NAVs and optimizing portfolios. But for all these powerful features and the beautiful charts we discussed in [Streamlit Dashboard Application](#chapter-1-streamlit-dashboard-application), there's one fundamental question: **Where does all the data come from?**
 
 Imagine you have a giant filing cabinet filled with all the mutual fund information – historical prices, fund details, transaction records, and more. How do your dashboard pages reliably, quickly, and safely get the specific pieces of information they need from this filing cabinet? This is exactly the problem our **Database Query Helper** solves!
 
@@ -137,7 +137,7 @@ def load_data(query):
 
 Let's break down the key parts of this code:
 
-- **`DB_PATH = ...`**: This line figures out the exact location of our SQLite database file (`bluestock_mf.db`). This database holds all the mutual fund data we've collected. We'll learn more about what's inside it in the [Data Model / Database Schema](04_data_model___database_schema_.md) chapter.
+- **`DB_PATH = ...`**: This line figures out the exact location of our SQLite database file (`bluestock_mf.db`). This database holds all the mutual fund data we've collected. We'll learn more about what's inside it in the [Data Model / Database Schema](#chapter-4-data-model--database-schema) chapter.
 - **`@st.cache_data`**: This is a special instruction from the Streamlit library. It tells Python, "Hey, remember the results of this `load_data` function! If it's called again with the _exact same inputs_ (the `query` string), don't run the code inside; just give back the saved result." This is a huge performance booster for our dashboard.
 - **`conn = sqlite3.connect(DB_PATH)`**: This line establishes the connection to our SQLite database. Think of it as opening the filing cabinet.
 - **`df = pd.read_sql(query, conn)`**: This is a powerful function from the Pandas library. It takes your `query` (the SQL request) and the `conn` (the open database connection), sends the query to the database, waits for the results, and then immediately converts those results into a `pandas DataFrame`. This is how we get our neat data table!
@@ -150,13 +150,13 @@ In essence, `load_data` is a robust and efficient wrapper that handles all the t
 
 In this chapter, we uncovered the vital role of the **Database Query Helper**, specifically our `load_data` function. We learned that it's the core component responsible for securely connecting to our SQLite database, executing specific SQL queries to fetch data, efficiently converting that data into user-friendly Pandas DataFrames, and closing connections. We also understood the importance of the `@st.cache_data` decorator, which acts as a smart memory to significantly speed up our dashboard.
 
-This helper function ensures that all the data shown on our Streamlit dashboard, whether it's for simple KPIs or complex simulations, is retrieved reliably and quickly. But what exactly _is_ in this database? In our next chapter, we'll dive into the [Data Model / Database Schema](04_data_model___database_schema_.md) to understand the structure and content of our mutual fund data.
+This helper function ensures that all the data shown on our Streamlit dashboard, whether it's for simple KPIs or complex simulations, is retrieved reliably and quickly. But what exactly _is_ in this database? In our next chapter, we'll dive into the [Data Model / Database Schema](#chapter-4-data-model--database-schema) to understand the structure and content of our mutual fund data.
 
 ---
 
 # Chapter 4: Data Model / Database Schema
 
-In our last chapter, [Database Query Helper](03_database_query_helper_.md), we learned about `load_data` – our trusty librarian for fetching information from the database using special requests called SQL queries. But how does this librarian know where to find the books, what sections they belong to, or how different books relate to each other?
+In our last chapter, [Database Query Helper](#chapter-3-database-query-helper), we learned about `load_data` – our trusty librarian for fetching information from the database using special requests called SQL queries. But how does this librarian know where to find the books, what sections they belong to, or how different books relate to each other?
 
 This is where the **Data Model / Database Schema** comes in! It's the master plan, the blueprint, or the complete catalog system of our entire mutual fund analytics database.
 
@@ -292,7 +292,7 @@ Using our understanding of the Data Model and the `data_dictionary.md`, here's h
 
 2.  **Identify how to link them:** Both tables have `amfi_code`. This is our common "key" to connect fund details with its daily prices.
 
-3.  **Construct an SQL Query:** We'll ask our [Database Query Helper](03_database_query_helper_.md) (the `load_data` function) for this.
+3.  **Construct an SQL Query:** We'll ask our [Database Query Helper](#chapter-3-database-query-helper) (the `load_data` function) for this.
 
     First, let's get just the fund details:
 
@@ -348,7 +348,7 @@ Using our understanding of the Data Model and the `data_dictionary.md`, here's h
 
 ### Under the Hood: The Schema in Action
 
-When our Streamlit dashboard page wants to display "Industry Overview" or "Fund Performance," its Python code uses our `load_data` helper (from [Database Query Helper](03_database_query_helper_.md)). The `load_data` function receives an SQL query string that is carefully crafted based on our understanding of the **Data Model**.
+When our Streamlit dashboard page wants to display "Industry Overview" or "Fund Performance," its Python code uses our `load_data` helper (from [Database Query Helper](#chapter-3-database-query-helper)). The `load_data` function receives an SQL query string that is carefully crafted based on our understanding of the **Data Model**.
 
 Here's a simplified sequence of how the dashboard uses the Data Model:
 
@@ -378,6 +378,6 @@ Without this well-defined schema, writing correct queries and consistently getti
 
 In this chapter, we explored the crucial concept of the **Data Model / Database Schema**. We learned that it's the blueprint that defines the structure of our mutual fund analytics database, detailing what information is stored, how it's organized into **tables** (like `dim_fund` and `fact_nav`), what **columns** (specific details) each table contains, and how **keys** (like `amfi_code`) link related data across tables. We also understood the difference between descriptive **dimension tables** and quantitative **fact tables**.
 
-This understanding is fundamental, as it allows all our dashboard components and simulation modules to intelligently request and retrieve the precise data they need. But where does all this organized data come from in the first place? In our next chapter, we'll discover the [ETL Pipeline (Extract, Transform, Load)](05_etl_pipeline__extract__transform__load__.md), which is responsible for gathering, cleaning, and loading all this raw financial data into our beautifully structured database.
+This understanding is fundamental, as it allows all our dashboard components and simulation modules to intelligently request and retrieve the precise data they need. But where does all this organized data come from in the first place? In our next chapter, we'll discover the [ETL Pipeline (Extract, Transform, Load)](#chapter-5-etl-pipeline-extract-transform-load), which is responsible for gathering, cleaning, and loading all this raw financial data into our beautifully structured database.
 
 ---
