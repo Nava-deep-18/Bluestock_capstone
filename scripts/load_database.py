@@ -1,3 +1,8 @@
+"""
+Module: load_database.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import pandas as pd
 import sqlite3
 from pathlib import Path

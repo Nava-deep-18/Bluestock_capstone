@@ -1,3 +1,8 @@
+"""
+Module: 3_Investor_Analytics.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import streamlit as st
 import pandas as pd
 import sqlite3

@@ -1,3 +1,8 @@
+"""
+Module: 5_Monte_Carlo_Simulation.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import streamlit as st
 import pandas as pd
 import numpy as np

@@ -1,3 +1,8 @@
+"""
+Module: create_dual_axis_data.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import pandas as pd
 from pathlib import Path
 import os
@@ -25,4 +30,3 @@ merged_df = pd.merge(sip_df, nifty_monthly, on='month', how='inner')
 
 # Save for Power BI
 merged_df.to_csv(data_dir / 'clean_sip_vs_nifty.csv', index=False)
-print("Successfully generated clean_sip_vs_nifty.csv")

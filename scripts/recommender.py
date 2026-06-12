@@ -1,3 +1,8 @@
+"""
+Module: recommender.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import pandas as pd
 from pathlib import Path
 

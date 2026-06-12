@@ -1,3 +1,8 @@
+"""
+Module: etl_pipeline.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 # As i had already experimented in notebooks based on that results this pipline was inspired
 import os
 import pandas as pd

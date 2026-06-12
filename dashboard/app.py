@@ -1,3 +1,8 @@
+"""
+Module: app.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import streamlit as st
 import os
 

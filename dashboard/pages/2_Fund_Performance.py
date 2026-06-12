@@ -1,3 +1,8 @@
+"""
+Module: 2_Fund_Performance.py
+Description: Component of the Bluestock Mutual Fund Analytics Capstone.
+"""
+
 import streamlit as st
 import pandas as pd
 import sqlite3
