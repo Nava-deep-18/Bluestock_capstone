@@ -9,10 +9,6 @@ approach.pdf
 __pycache__/
 *.pyc
 
-# Database files
-*.db
-*.sqlite
-*.sqlite3
 
 # OS Files
 .DS_Store
