@@ -1,5 +1,21 @@
 # Bluestock_mf_capstone
 
+<div align="center">
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Streamlit-red?logo=streamlit&logoColor=white)](https://bluestockcapstone-m6s4cfulhnzwt5fssvmjhh.streamlit.app/)
+![Python](https://img.shields.io/badge/Python-3.11+-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-Database-003B57?logo=sqlite&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-ETL-150458?logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-Math-013243?logo=numpy&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-Charts-3F4F75?logo=plotly&logoColor=white)
+![SciPy](https://img.shields.io/badge/SciPy-Optimization-8CAAE6?logo=scipy&logoColor=white)
+![Mutual Fund Analytics](https://img.shields.io/badge/Domain-Mutual_Fund_Analytics-brightgreen)
+![Portfolio Optimization](https://img.shields.io/badge/Feature-Portfolio_Optimization-blueviolet)
+
+</div>
+
+
 This project, Bluestock Mutual Fund Analytics, offers an _interactive web dashboard_ built with Streamlit for exploring mutual fund data. It features an automated **ETL pipeline** to collect, clean, and load financial data into a structured _SQLite database_. Users can visualize fund performance, industry trends, and investor demographics, along with advanced **financial simulations** like Monte Carlo projections and Markowitz portfolio optimization to make informed investment decisions.
 
 ```mermaid
